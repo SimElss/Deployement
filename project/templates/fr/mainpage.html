@@ -1,0 +1,43 @@
+{% extends "index.html" %}
+{% block content %}
+{% from "candidat_macro.html" import show_candidat %}
+<div class="mymain-bar d-flex justify-content-between align-items-center">
+  <h1>Accueil</h1>
+  <div style="margin-right: 80px;">
+      <a href="/en/switch_to_fr" class="btn btn-outline-dark me-2">Français</a>
+      <a href="/fr/switch_to_en" class="btn btn-outline-dark">Anglais</a>
+  </div>
+</div>
+
+<div style="padding-left: 35px;">
+  <div class="myfac-box p-3 mt-5">
+      <a class="mydoss-bar" target="_blank" href="https://jobs.unamur.be/"> Lien vers les appels à candidatures de la faculté disponible</a>
+  </div>
+
+  <div class="my-box p-3 mt-5">
+    <table class="table table-striped table-hover caption-top">
+      <caption class="mb-3">Dossier des candidats les plus récents</caption>
+      <tbody>
+        {% for candidat in candidats[:5]%}
+          {{ show_candidat(candidat) }}
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="text-center">
+      <form action="/fr/dossier" method="get">
+        <button type="" class="btn btn-outline-dark" style="box-shadow: 3px 2px 2px 3px rgb(179, 186, 194);" href="/fr/dossier">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 15 15">
+            <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+          </svg>
+        </button>
+      </form>
+    </div>
+    <hr style="border: 1px solid #000000">
+    {% if has_missing_details %}
+      <div class="alert alert-warning mt-3" role="alert" style="text-align: center;">
+          <strong>Attention :</strong> Des dossiers n'ont pas de détails.
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

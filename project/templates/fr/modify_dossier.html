@@ -1,0 +1,32 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="mymain-bar d-flex justify-content-between align-items-center">
+    <h1>Dossier(s) en cours - {{dossier.name}}</h1>
+    <div style="margin-right: 80px;">
+        <a href="/en/switch_to_fr" class="btn btn-outline-dark me-2">Français</a>
+        <a href="/fr/switch_to_en" class="btn btn-outline-dark">Anglais</a>
+    </div>
+</div>
+<div class="my-box mt-5" style="padding: 20px; width: 1000px; margin-left: 35px;">
+    <h1>Modifier le dossier</h1>
+    <form action="/fr/edit/{{dossier.id}}" method="post">
+        <div class="mb-3">
+            <label for="name" class="form-label">Nom</label>
+            <input type="text" id="name" name="name" class="form-control" value="{{ dossier.name }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="mail" class="form-label">Email</label>
+            <input type="email" id="mail" name="mail" class="form-control" value="{{ dossier.mail }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="phonenumber" class="form-label">Téléphone</label>
+            <input type="text" id="phonenumber" name="phonenumber" class="form-control" value="{{ dossier.phonenumber }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="postereference" class="form-label">Référence Poste</label>
+            <input type="text" id="postereference" name="postereference" class="form-control" value="{{ dossier.postereference }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "index.html" %}
+{% block content %}
+{% from "candidat_macro.html" import show_candidat %}
+<div class="mymain-bar d-flex justify-content-between align-items-center">
+  <h1>Dossier(s)</h1>
+  <div style="margin-right: 80px;">
+      <a href="/en/switch_to_fr" class="btn btn-outline-dark me-2">Français</a>
+      <a href="/fr/switch_to_en" class="btn btn-outline-dark">Anglais</a>
+  </div>
+</div>
+<div id="notification-bar" class="myfac-box p-3 mt-5" style="padding-top: 10px; margin-left: 35px; padding-left: 35px;">
+    <h5>
+      <div class="notification pt-2">
+        <svg xmlns="http://www.w3.org/2000/svg" style="padding-bottom:3px; margin-right: 10px;" width="20" height="20" fill="currentColor" class="bi bi-exclamation-circle-fill " viewBox="0 0 16 16">
+          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4m.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/>
+        </svg>
+      {% if notifications %}
+        {{ notifications }}  
+      {% else %}
+          Vous n'avez pas de nouvelles notifications pour le moment.
+      {% endif %}
+      </div>
+    </h5>
+</div>
+<div style="padding-left: 35px;">
+    <div class="my-box p-3 mt-5">
+        <div style="max-height: 400px; overflow-y: auto;">
+          <div class="search-container mb-2">
+            <div style="width: 300px; font-size: 20px;">Ensemble des dossiers</div>
+              <form class="d-flex" method="POST" action="/fr/dossier/searchcandidat">
+                <input class="my-search-bar me-2" type="text" name="keyword" placeholder="Rechercher un dossier" aria-label="Search">
+                <button class="btn btn-outline-dark" style="box-shadow: 3px 2px 2px 3px rgb(179, 186, 194);" type="submit">Rechercher</button>
+              </form>
+          </div>
+          <hr style="border: 1px solid #000000">
+              <table class="table table-striped table-hover caption-top">
+              <tbody>
+                {% for dossier in dossiers%}
+                  {{ show_candidat(dossier) }}
+                {% endfor %}
+              </tbody>
+          </table>
+        </div>
+          <hr style="border: 1px solid #000000">
+          {% if has_missing_details %}
+            <div class="alert alert-warning mt-3" role="alert" style="text-align: center;">
+              <strong>Attention :</strong> Des dossiers n'ont pas de détails.
+            </div>
+          {% endif %}
+    </div>
+</div>
+{% endblock %}

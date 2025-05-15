@@ -1,0 +1,60 @@
+{% extends "index.html" %}
+{% block content %}
+{% from "candidat_macro.html" import show_candidat %}
+<div class="mymain-bar d-flex justify-content-between align-items-center">
+    <h1>Ongoing File(s) - {{ dossier.name }}</h1>
+    <div style="margin-right: 80px;">
+        <a href="/en/switch_to_fr" class="btn btn-outline-dark me-2">French</a>
+        <a href="/fr/switch_to_en" class="btn btn-outline-dark">English</a>
+    </div>
+</div>
+<div style="padding-left: 35px;">
+    <div style="padding-left: 35px;">
+        <div class="my-box p-3 mt-5">
+            <h2>File Details : {{ dossier.postereference }}</h2>
+            <p><strong>Name:</strong> <span class="encadre">{{ dossier.name }}</span></p>
+            <p><strong>Email:</strong> <span class="encadre">{{ dossier.mail }}</span></p>
+            <p><strong>Phone Number:</strong> <span class="encadre">{{ dossier.phonenumber }}</span></p>
+            <p><strong>File Reference:</strong> <span class="encadre">{{ dossier.postereference }}</span></p>
+            <p><strong>Professor:</strong> <span class="encadre">{{ dossier.profref }}</span></p>
+            <p><strong>File status:</strong> 
+                {% if details.dossier_complet %}
+                    <span class="encadre" style="border-color: green;">Your file is complete.</span>
+                {% else %}
+                    <span class="encadre" style="border-color: red;">Your file needs to be completed.</span>
+                {% endif %}
+            </p>
+
+            <hr class="mb-3" style="border: 1px solid #000000">
+            
+            
+            <p><strong>Closing Date:</strong> <span class="encadre">{{ details.date_cloture.strftime('%d/%m/%Y') }}</span></p>
+            <p><strong>Reception Date:</strong> <span class="encadre">{{ details.date_reception.strftime('%d/%m/%Y') }}</span></p>
+            <p><strong>Date of Transmission to the Commission:</strong> <span class="encadre">{{ details.date_transmission_commission.strftime('%d/%m/%Y') }}</span></p>
+            <p><strong>Date of Commission Meeting:</strong> <span class="encadre">{{ details.date_reunion_commission.strftime('%d/%m/%Y') }}</span></p>
+            <p><strong>Application Not Retained:</strong> <span class="encadre">{{ details.candidature_non_retenue }}</span></p>
+            <p><strong>Information Confirmation:</strong> <span class="encadre">{{ details.confirmation_information }}</span></p>
+            <p><strong>Date the Candidate Will Be Heard:</strong> <span class="encadre">{{ details.date_entendu.strftime('%d/%m/%Y') }}</span></p>
+            <p><strong>Ranking Position:</strong> <span class="encadre">{{ details.position_classement }}</span></p>
+            <p><strong>Submission Date to Faculty Authorities:</strong> <span class="encadre">{{ details.date_soumission_autorites.strftime('%d/%m/%Y') }}</span></p>
+            <p><strong>Transmission Date to Authorities:</strong> <span class="encadre">{{ details.date_transmission_autorites.strftime('%d/%m/%Y') }}</span></p>
+            <p><strong>Expected Start Date:</strong> <span class="encadre">{{ details.date_entree_fonction.strftime('%d/%m/%Y') }}</span></p>
+            <p><strong>File Deletion Date:</strong> <span class="encadre">{{ details.date_suppression_dossier.strftime('%d/%m/%Y') }}</span></p>
+            {% if group != "candidat" %}
+            <div class="text-center">
+                <a href="/en/modify_detail/{{ dossier.id }}">
+                    <button type="button" class="btn btn-outline-dark" style="width: 400px; height: 50px; box-shadow: 3px 2px 2px 3px rgb(179, 186, 194);">
+                        Edit File Details
+                    </button>
+                </a>
+            </div>
+            {% endif %}
+            <a href="/en/edit_dossier/{{dossier.id}}">
+                <button type="button" class="btn btn-outline-dark" style="width: 400px; height: 50px; box-shadow: 3px 2px 2px 3px rgb(179, 186, 194);">
+                    Edit Personal Information
+                </button>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

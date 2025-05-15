@@ -1,0 +1,11 @@
+colorama==0.4.6
+fastapi==0.115.12
+fastapi_login==1.10.3
+msal==1.32.0
+pandas==2.2.3
+pydantic==2.11.1
+python-dotenv==1.1.0
+SQLAlchemy==2.0.38
+starlette==0.46.1
+uvicorn==0.34.0
+xlsxwriter==3.1.2 

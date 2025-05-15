@@ -1,0 +1,122 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="mymain-bar d-flex justify-content-between align-items-center">
+    <h1>Modify dossier details - {{ dossier.name }}</h1>
+    <div style="margin-right: 80px;">
+        <a href="/en/switch_to_fr" class="btn btn-outline-dark me-2">French</a>
+        <a href="/fr/switch_to_en" class="btn btn-outline-dark">English</a>
+    </div>
+</div>
+<div style="padding-left: 35px;">
+    <div class="my-box p-3 mt-5">
+        <form action="/en/modify_detail/{{ dossier.id }}" method="post">
+            <input type="hidden" name="dossier_id" value="{{ dossier.id }}" />
+            
+            <p class="mt-3"><strong>Email:</strong> <span class="encadre">{{ dossier.mail }}</span></p>
+            <div class="mb-3">
+                <label for="mail" class="form-label">Edit Email</label>
+                <input type="email" id="mail" name="mail" class="form-control" value="{{ dossier.mail }}" required />
+            </div>
+            
+            <p><strong>Phone number:</strong> <span class="encadre">{{ dossier.phonenumber }}</span></p>
+            <div class="mb-3">
+                <label for="phonenumber" class="form-label">Edit Phone Number</label>
+                <input type="text" id="phonenumber" name="phonenumber" class="form-control" value="{{ dossier.phonenumber }}" required />
+            </div>
+            
+            <p><strong>Closing date:</strong> <span class="encadre">{{ details.date_cloture.strftime('%d/%m/%Y') }}</span></p>
+            <div class="mb-3">
+                <label for="date_cloture" class="form-label">Edit Closing Date</label>
+                <input type="date" id="date_cloture" name="date_cloture" class="form-control" value="{{ details.date_cloture.strftime('%Y-%m-%d') }}" required />
+            </div>
+            
+            <p><strong>Reception date:</strong> <span class="encadre">{{ details.date_reception.strftime('%d/%m/%Y') }}</span></p>
+            <div class="mb-3">
+                <label for="date_reception" class="form-label">Edit Reception Date</label>
+                <input type="date" id="date_reception" name="date_reception" class="form-control" value="{{ details.date_reception.strftime('%Y-%m-%d') }}" required />
+            </div>
+            
+            <p><strong>Complete dossier:</strong> <span class="encadre">{{ details.dossier_complet }}</span></p>
+            <div class="mb-3">
+                <label for="dossier_complet" class="form-label">Edit Complete Dossier</label>
+                <select id="dossier_complet" name="dossier_complet" class="form-control">
+                    <option value="True" {% if details.dossier_complet %}selected{% endif %}>Yes</option>
+                    <option value="False" {% if not details.dossier_complet %}selected{% endif %}>No</option>
+                </select>
+            </div>
+        
+            <p><strong>Transmission date to the commission:</strong> <span class="encadre">{{ details.date_transmission_commission.strftime('%d/%m/%Y') }}</span></p>
+            <div class="mb-3">
+                <label for="date_transmission_commission" class="form-label">Edit Transmission Date to the Commission</label>
+                <input type="date" id="date_transmission_commission" name="date_transmission_commission" class="form-control" value="{{ details.date_transmission_commission.strftime('%Y-%m-%d') }}" />
+            </div>
+        
+            <p><strong>Commission meeting date:</strong> <span class="encadre">{{ details.date_reunion_commission.strftime('%d/%m/%Y') }}</span></p>
+            <div class="mb-3">
+                <label for="date_reunion_commission" class="form-label">Edit Commission Meeting Date</label>
+                <input type="date" id="date_reunion_commission" name="date_reunion_commission" class="form-control" value="{{ details.date_reunion_commission.strftime('%Y-%m-%d') }}" />
+            </div>
+            
+            <p><strong>Application not retained:</strong> <span class="encadre">{{ details.candidature_non_retenue }}</span></p>
+            <div class="mb-3">
+                <label for="candidature_non_retenue" class="form-label">Edit Application Not Retained</label>
+                <select id="candidature_non_retenue" name="candidature_non_retenue" class="form-control">
+                    <option value="True" {% if details.candidature_non_retenue %}selected{% endif %}>Yes</option>
+                    <option value="False" {% if not details.candidature_non_retenue %}selected{% endif %}>No</option>
+                </select>
+            </div>
+        
+            <p><strong>Information confirmation:</strong> <span class="encadre">{{ details.confirmation_information }}</span></p>
+            <div class="mb-3">
+                <label for="confirmation_information" class="form-label">Edit Information Confirmation</label>
+                <select id="confirmation_information" name="confirmation_information" class="form-control">
+                    <option value="True" {% if details.confirmation_information %}selected{% endif %}>Yes</option>
+                    <option value="False" {% if not details.confirmation_information %}selected{% endif %}>No</option>
+                </select>
+            </div>
+        
+            <p><strong>Date the candidate will be heard:</strong> <span class="encadre">{{ details.date_entendu.strftime('%d/%m/%Y') }}</span></p>
+            <div class="mb-3">
+                <label for="date_entendu" class="form-label">Edit Date the Candidate Will Be Heard</label>
+                <input type="date" id="date_entendu" name="date_entendu" class="form-control" value="{{ details.date_entendu.strftime('%Y-%m-%d') }}" />
+            </div>
+        
+            <p><strong>Ranking position:</strong> <span class="encadre">{{ details.position_classement }}</span></p>
+            <div class="mb-3">
+                <label for="position_classement" class="form-label">Edit Ranking Position</label>
+                <input type="number" id="position_classement" name="position_classement" class="form-control" value="{{ details.position_classement }}" />
+            </div>
+        
+            <p><strong>Submission date to faculty authorities:</strong> <span class="encadre">{{ details.date_soumission_autorites.strftime('%d/%m/%Y') }}</span></p>
+            <div class="mb-3">
+                <label for="date_soumission_autorites" class="form-label">Edit Submission Date to Faculty Authorities</label>
+                <input type="date" id="date_soumission_autorites" name="date_soumission_autorites" class="form-control" value="{{ details.date_soumission_autorites.strftime('%Y-%m-%d') }}" />
+            </div>
+        
+            <p><strong>Transmission date to authorities:</strong> <span class="encadre">{{ details.date_transmission_autorites.strftime('%d/%m/%Y') }}</span></p>
+            <div class="mb-3">
+                <label for="date_transmission_autorites" class="form-label">Edit Transmission Date to Authorities</label>
+                <input type="date" id="date_transmission_autorites" name="date_transmission_autorites" class="form-control" value="{{ details.date_transmission_autorites.strftime('%Y-%m-%d') }}" />
+            </div>
+        
+            <p><strong>Planned start date:</strong> <span class="encadre">{{ details.date_entree_fonction.strftime('%d/%m/%Y') }}</span></p>
+            <div class="mb-3">
+                <label for="date_entree_fonction" class="form-label">Edit Planned Start Date</label>
+                <input type="date" id="date_entree_fonction" name="date_entree_fonction" class="form-control" value="{{ details.date_entree_fonction.strftime('%Y-%m-%d') }}" />
+            </div>
+        
+            <p><strong>Dossier deletion date:</strong> <span class="encadre">{{ details.date_suppression_dossier.strftime('%d/%m/%Y') }}</span></p>
+            <div class="mb-3">
+                <label for="date_suppression_dossier" class="form-label">Edit Dossier Deletion Date</label>
+                <input type="date" id="date_suppression_dossier" name="date_suppression_dossier" class="form-control" value="{{ details.date_suppression_dossier.strftime('%Y-%m-%d') }}" />
+            </div>
+        
+            <!-- Submit button -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-outline-dark">Save Changes</button>
+            </div>
+        </form>
+        
+    </div>
+</div>
+{% endblock %}

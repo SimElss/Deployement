@@ -1,0 +1,94 @@
+{% macro show_candidat(candidat) %}
+<tr style="position: relative;">
+  <td class="mydoss-bar">
+    <a href="/fr/dossier/{{candidat.id}}" class="mydoss-link">
+      <div class="d-flex">
+        <div class="p-2 flex-fill" style="width: 5%;">{{ candidat.name }}</div>
+        <div class="p-2 flex-fill" style="width: 20%;">{{ candidat.mail }}</div>
+        <div class="p-2 flex-fill" style="width: 10%;">{{ candidat.phonenumber }}</div>
+        <div class="p-2 flex-fill" style="width: 15%;">{{ candidat.postereference }}</div>
+        <div class="p-2 flex-fill" style="width: 15%;">{{ candidat.profref }}</div>
+        <div class="p-2 flex-fill" style="width: 15%;">
+          {% if candidat.image %}
+            <img src="{{ candidat.image }}" alt="Image de {{ candidat.name }}" width="100px" height="100px">
+          {% else %}
+            <span>Pas d'image</span>
+          {% endif %}
+        </div>
+      </div>
+      {% if not candidat.details %}
+      <div class="alert alert-danger d-flex align-items-center justify-content-center position-absolute" role="alert" style="right: 0; top: 50%; transform: translateY(-50%); width: 35px; height: 35px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); padding: 0;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4m.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/>
+          </svg>
+      </div>
+      {% endif %}
+    </a>
+  </td>
+</tr>
+{% endmacro %}
+<!-- ------------------------------------------------------------------>
+<!-- ------------------------------------------------------------------>
+<!-- ------------------------------------------------------------------>
+{% macro supp_candidat(candidat) %}
+<tr style="position: relative;">
+  <td class="mydoss-bar">
+    <a href="/fr/dossier/candidat/delete/{{ candidat.id }}" class="mydoss-link">
+      <div class="d-flex">
+        <div class="p-2 flex-fill" style="width: 5%;">{{ candidat.name }}</div>
+        <div class="p-2 flex-fill" style="width: 20%;">{{ candidat.mail }}</div>
+        <div class="p-2 flex-fill" style="width: 10%;">{{ candidat.phonenumber }}</div>
+        <div class="p-2 flex-fill" style="width: 15%;">{{ candidat.postereference }}</div>
+        <div class="p-2 flex-fill" style="width: 15%;">{{ candidat.profref }}</div>
+        <div class="p-2 flex-fill" style="width: 15%;">
+          {% if candidat.image %}
+            <img src="{{ candidat.image[2:] }}" alt="Image de {{ candidat.name }}" width="100px" height="100px">
+          {% else %}
+            <span>Pas d'image</span>
+          {% endif %}
+        </div>
+      </div>
+      {% if not candidat.details %}
+      <div class="alert alert-danger d-flex align-items-center justify-content-center position-absolute" role="alert" style="right: 0; top: 50%; transform: translateY(-50%); width: 35px; height: 35px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); padding: 0;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4m.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/>
+          </svg>
+      </div>
+      {% endif %}
+    </a>
+  </td>
+</tr>
+{% endmacro %}
+<!-- ------------------------------------------------------------------>
+<!-- ------------------------------------------------------------------>
+<!-- ------------------------------------------------------------------>
+{% macro notif_candidat(candidat) %}
+<tr style="position: relative;">
+  <td class="mydoss-bar">
+    <a href="/fr/notif/{{candidat.id}}/notification" class="mydoss-link">
+      <div class="d-flex">
+        <div class="p-2 flex-fill" style="width: 5%;">{{ candidat.name }}</div>
+        <div class="p-2 flex-fill" style="width: 20%;">{{ candidat.mail }}</div>
+        <div class="p-2 flex-fill" style="width: 10%;">{{ candidat.phonenumber }}</div>
+        <div class="p-2 flex-fill" style="width: 15%;">{{ candidat.postereference }}</div>
+        <div class="p-2 flex-fill" style="width: 15%;">{{ candidat.profref }}</div>
+        <div class="p-2 flex-fill" style="width: 15%;">
+          {% if candidat.image %}
+            <img src="{{ candidat.image[2:] }}" alt="Image de {{ candidat.name }}" width="100px" height="100px">
+          {% else %}
+            <span>Pas d'image</span>
+          {% endif %}
+        </div>
+      </div>
+      {% if not candidat.details %}
+      <div class="alert alert-danger d-flex align-items-center justify-content-center position-absolute" role="alert" style="right: 0; top: 50%; transform: translateY(-50%); width: 35px; height: 35px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); padding: 0;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4m.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/>
+          </svg>
+      </div>
+      {% endif %}
+    </a>
+  </td>
+</tr>
+
+{% endmacro %}

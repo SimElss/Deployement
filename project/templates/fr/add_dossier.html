@@ -1,0 +1,50 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="mymain-bar d-flex justify-content-between align-items-center">
+    <h1>Ajout d'un nouveau dossier - Partie 1</h1>
+    <div style="margin-right: 80px;">
+        <a href="/en/switch_to_fr" class="btn btn-outline-dark me-2">Français</a>
+        <a href="/fr/switch_to_en" class="btn btn-outline-dark">Anglais</a>
+    </div>
+</div>
+<div style="padding-left: 35px;">
+    <div style="padding-left: 35px;">
+        <div class="my-box p-3 mt-5">
+            <h2 class="text-center mb-4">Complétez les informations suivantes</h2>
+            <form method="POST" action="/fr/dossier/new/add" enctype="multipart/form-data" onsubmit="return validateForm()">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Nom d'utilisateur</label>
+                    <input type="text" id="username" name="username" class="form-control" placeholder="Selice" required>
+                </div>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nom</label>
+                    <input type="text" id="name" name="name" class="form-control" placeholder="Elice" required>
+                </div>
+                <div class="mb-3">
+                    <label for="mail" class="form-label">Email</label>
+                    <input type="email" id="mail" name="mail" class="form-control" placeholder="elicesimon06@gmail.com" required>
+                </div>
+                <div class="mb-3">
+                    <label for="postereference" class="form-label">Référence du poste</label>
+                    <input type="text" id="postereference" name="postereference" class="form-control" placeholder="Secrétaire" required>
+                </div>
+                <div class="mb-3">
+                    <label for="profref" class="form-label">Professeur de Référence</label>
+                    <input type="text" id="profref" name="profref" class="form-control" value="" required>
+                </div>
+                <div class="mb-3">
+                    <label for="phonenumber" class="form-label">Numéro de téléphone</label>
+                    <input type="text" id="phonenumber" name="phonenumber" class="form-control" placeholder="0496066387" required>
+                </div>
+                <div class="mb-3">
+                    <label for="image">Image :</label>
+                    <input type="file" id="image" name="image" accept=".jpg,.jpeg,.png">
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-outline-dark" style="width: 400px; height: 50px; box-shadow: 3px 2px 2px 3px rgb(179, 186, 194);">Ajouter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

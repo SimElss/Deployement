@@ -1,0 +1,75 @@
+{% extends "index.html" %}
+{% block content %}
+{% from "candidat_macro.html" import show_candidat %}
+<div class="mymain-bar d-flex justify-content-between align-items-center">
+    <h1>Dossier(s) en cours - {{ dossier.name }}</h1>
+    <div style="margin-right: 80px;">
+        <a href="/en/switch_to_fr" class="btn btn-outline-dark me-2">Français</a>
+        <a href="/fr/switch_to_en" class="btn btn-outline-dark">Anglais</a>
+    </div>
+</div>
+<div style="padding-left: 35px;">
+    <div style="padding-left: 35px;">
+        <div class="my-box p-3 mt-5">
+            <h2 class="mb-5">Détails du dossier: {{ dossier.postereference }}</h2>
+            <p><strong>Nom du candidat:</strong> <span class="encadre">{{ dossier.name }}</span></p>
+            <p><strong>Email:</strong> <span class="encadre">{{ dossier.mail }}</span></p>
+            <p><strong>Numéro de téléphone:</strong> <span class="encadre">{{ dossier.phonenumber }}</span></p>
+            <p><strong>Professeur:</strong> <span class="encadre">{{ dossier.profref }}</span></p>
+            <p><strong>Dossier complet:</strong> 
+                {% if details.dossier_complet %}
+                    <span class="encadre" style="border-color: green;">Votre dossier est complété.</span>
+                {% else %}
+                    <span class="encadre" style="color: red;">Votre dossier de candidature n'est pas complet, Voir vos notifications pour recevoir l'email et compléter votre dossier</span>
+                    <span class="encadre" style="color: red;">Sans le formulaire de candidature UNamur dûment complété, votre candidature ne sera pas prise en compte. </span>
+                {% endif %}
+            </p>
+            <p><strong>Référence de l'appel à candidatures:</strong> <span class="encadre">{{ dossier.postereference }}</span></p>
+            <p><strong>Candidature non retenue:</strong>
+                {% if details.candidature_non_retenue == "pending" %}
+                    <span class="encadre" style="border-color: orange;">En attente</span>
+                {% elif details.candidature_non_retenue == "yes" %}
+                    <span class="encadre" style="border-color: green;">Oui</span>
+                {% elif details.candidature_non_retenue == "no" %}
+                    <span class="encadre" style="border-color: red;">Non</span>
+                {% else %}
+                    <span class="encadre" style="border-color: orange;">Encore en attente</span>
+                {% endif %}
+            </p>
+
+            <hr class="mb-3" style="border: 1px solid #000000">
+
+            <div class="timeline mt-5">
+                <h3 class="mb-4">Calendrier des étapes</h3>
+                <ul class="timeline-list">
+                    {% for event in timeline_dates %}
+                        <li class="{% if event.date > now %}upcoming{% else %}completed{% endif %}">
+                            <strong>{{ event.label }}:</strong> {{ event.date.strftime('%d/%m/%Y') }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            {% if group != "candidat" %}
+            <div class="text-center">
+                <a href="/fr/modify_detail/{{ dossier.id }}">
+                    <button type="button" class="btn btn-outline-dark" style="width: 400px; height: 50px; box-shadow: 3px 2px 2px 3px rgb(179, 186, 194);">
+                        Modifier les détails du dossier
+                    </button>
+                </a>
+            
+            {% endif %}
+                <a href="/fr/edit_dossier/{{dossier.id}}">
+                    <button type="button" class="btn btn-outline-dark" style="width: 400px; height: 50px; box-shadow: 3px 2px 2px 3px rgb(179, 186, 194);">
+                        Modifier les informations personnelles
+                    </button>
+                </a>
+            </div>
+            
+        </div>
+        
+        
+    </div>
+    
+</div>
+{% endblock %}

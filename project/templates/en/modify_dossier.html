@@ -1,0 +1,32 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="mymain-bar d-flex justify-content-between align-items-center">
+    <h1>Current file - {{dossier.name}}</h1>
+    <div style="margin-right: 80px;">
+        <a href="/en/switch_to_fr" class="btn btn-outline-dark me-2">French</a>
+        <a href="/fr/switch_to_en" class="btn btn-outline-dark">English</a>
+    </div>
+</div>
+<div class="my-box mt-5" style="padding: 20px; width: 1000px; margin-left: 35px;">
+    <h1>Modify the dossier</h1>
+    <form action="/en/edit/{{dossier.id}}" method="post">
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" id="name" name="name" class="form-control" value="{{ dossier.name }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="mail" class="form-label">Mail</label>
+            <input type="email" id="mail" name="mail" class="form-control" value="{{ dossier.mail }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="phonenumber" class="form-label">Phonenumber</label>
+            <input type="text" id="phonenumber" name="phonenumber" class="form-control" value="{{ dossier.phonenumber }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="postereference" class="form-label">Reference of the Post</label>
+            <input type="text" id="postereference" name="postereference" class="form-control" value="{{ dossier.postereference }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</div>
+{% endblock %}

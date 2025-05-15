@@ -1,0 +1,42 @@
+{%extends "index.html"%}
+{% block content %}
+<div class="mylanguage-bar d-flex justify-content-between align-items-center text-center">
+    <div class="mytitlebar flex-grow-1 " style="margin-left: 150px;">
+        Applicant Tracking
+    </div>
+    <div>
+        <a href="/en/switch_to_fr" class="btn btn-outline-light">French</a>
+        <a href="/fr/switch_to_en" class="btn btn-outline-light">English</a>
+    </div>
+</div>
+<div class="mylogin-bar text-center mb-5">
+    Change the password
+</div>
+<div class="container mb-5" style="width: 50%">
+    <form action="/en/new_mdp" method="post" class="grid text-center p-4 mb-4 border-opacity-75">
+        {%if current_user == None%}
+        <div class="mb-4">
+            <label for="email" class="form-label">Mail</label>
+            <input type="email" id="email" class="form-control" name="email" required={{required}}/>
+        </div>
+        {%endif%}
+        <div class="mb-4">
+            <label for="old_pwd" class="form-label">Last password</label>
+            <input type="password" id="old_pwd" class="form-control" name="old_pwd" required="true"/>
+        </div>
+        <div class="mb-4">
+            <label for="new_pwd" class="form-label">New password</label>
+            <input type="password" id="new_pwd" class="form-control" name="new_pwd" required="true"/>
+        </div>
+        <div class="mb-4">
+            <label for="new_pwd_confirm" class="form-label">Confirm password ?</label>
+            <input type="password" id="new_pwd_confirm" class="form-control" name="new_pwd_confirm" required="true"/>
+        </div>
+        <div class="grid text-center">
+            <a href="/en/login"><button type="button" class="btn btn-outline-dark">Cancel</button></a>
+            <button type="submit" class="btn btn-outline-dark">Confirm</button>
+        </div>
+    </form>
+</div>
+    
+{% endblock %}

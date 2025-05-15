@@ -1,0 +1,34 @@
+{% extends "index.html" %}
+{% block content %}
+{% from "candidat_macro.html" import notif_candidat %}
+<div class="mymain-bar d-flex justify-content-between align-items-center">
+  <h1>Files - Notification</h1>
+  <div style="margin-right: 80px;">
+    <a href="/en/switch_to_fr" class="btn btn-outline-dark me-2">French</a>
+    <a href="/fr/switch_to_en" class="btn btn-outline-dark">English</a>
+  </div>
+</div>
+<div style="padding-left: 35px;">
+    <div class="my-box p-3 mt-5">
+        <table class="table table-hover caption-top">
+          <div class="search-container mb-2">
+            <div  style="width: 300px;">All files</div>
+              <form class="d-flex" method="POST" action="/en/dossier/delete/search">
+                <input class=" mydoss-bar me-2" type="text" name="keyword" placeholder="Rechercher un dossier" aria-label="Search">
+                <button class="btn btn-outline-dark" type="submit">Search</button>
+              </form>
+          </div>
+          <hr style="border: 1px solid #000000">
+          <div style="max-height: 300px; overflow-y: auto;">
+            <table class="table table-striped table-hover caption-top">
+                <tbody>
+                  {% for candidat in candidats %}
+                    {{ notif_candidat(candidat) }}
+                  {% endfor %}
+                </tbody>
+            
+            </table>
+          </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "index.html"%}
+{% block content %}
+<div class="mylanguage-bar d-flex justify-content-between align-items-center text-center">
+    <div class="mytitlebar flex-grow-1 " style="margin-left: 500px; ">
+        Applicant Tracking
+        <a href="/en/switch_to_fr" class="btn btn-outline-light" style="margin-left: 300px;">Français</a>
+        <a href="/fr/switch_to_en" class="btn btn-outline-light">Anglais</a>
+    </div>
+    
+</div>
+<div class="mylogin-bar text-center mb-5">
+    Connectez-vous à votre compte
+</div>
+<div class="container">
+    <div class="row justify-content-center" >
+        <div class="col-4">
+            <form action="/fr/login" method="post" class="grid text-center p-4 mb-5 border-opacity-75" style=" box-shadow: 3px 2px 2px 3px lightslategray;">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="text" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="mb-5">
+                    <label for="password" class="form-label">Mot de passe</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-outline-dark mb-4" style="height: 40px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                      </svg>
+                </button>
+            </form>
+            <p class="text-center mb-3">Pas encore de compte ? <a href="/fr/register">Inscrivez-vous</a></p>
+            <p class="text-center mb-5">Changer de mot de passe ? <a href="/fr/new_mdp">Réinitialisez-le</a></p>
+
+        </div>
+        {% if message != "None" %}
+        <div class="alert alert-success" role="alert">
+            {{message}}
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

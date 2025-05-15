@@ -1,0 +1,36 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="mymain-bar d-flex justify-content-between align-items-center">
+    <h1>Profil - {{ current_user.name }}</h1>
+    <div style="margin-right: 80px;">
+        <a href="/en/switch_to_fr" class="btn btn-outline-dark me-2">Français</a>
+        <a href="/fr/switch_to_en" class="btn btn-outline-dark">Anglais</a>
+    </div>
+</div>
+<div style="padding-left: 35px;">
+    <div class="my-box mt-5" style="padding: 35px;">
+            <h2 class="display-6 text-center">Vos informations</h2><br>
+            <form action="/fr/profile" method="post">
+                <div class="input-group mb-3">
+                    <label for="name" class="input-group-text">Nom</label>
+                    <input type="text" id="name" class="form-control" name="name" value="{{ current_user.name }}" required="true"/>
+                </div>
+                <div class="input-group mb-3">
+                    <label for="surname" class="input-group-text">Prénom</label>
+                    <input type="text" id="surname" class="form-control" name="surname" value="{{ current_user.surname }}" required="true"/>
+                </div>
+                <div class="input-group mb-5">
+                    <label for="username" class="input-group-text">Nom d'utilisateur</label>
+                    <input type="text" id="username" class="form-control" name="username" value="{{ current_user.username }}" required="true"/>
+                </div>
+                <hr class="mb-3" style="border: 1px solid #000000">
+                <div class="d-flex justify-content-between">
+                    <a href="/fr/new_mdp">
+                        <button type="button" class="btn btn-outline-warning" style="box-shadow: 3px 2px 2px 3px rgb(179, 186, 194);">Changer de mot de passe</button>
+                    </a>
+                    <button type="submit" class="btn btn-outline-dark" style="box-shadow: 3px 2px 2px 3px rgb(179, 186, 194);">Modifier le profil</button>
+                </div>
+            </form>
+    </div>
+</div>
+{% endblock %}

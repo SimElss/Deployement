@@ -1,0 +1,2 @@
+class ChangeMdpError(Exception):
+    pass

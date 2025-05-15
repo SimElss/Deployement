@@ -1,0 +1,8 @@
+msgid "Accueil"
+msgstr "Accueil"
+
+msgid "Lien vers les appels à candidatures de la faculté disponible"
+msgstr "Lien vers les appels à candidatures de la faculté disponible"
+
+msgid "Dossier des candidats les plus récents"
+msgstr "Dossier des candidats les plus récents"

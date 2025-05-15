@@ -1,0 +1,175 @@
+.body{
+    font-family: Georgia, 'Baskerville', Times, serif;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.search-container form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.my-box{
+    margin-bottom: 50px;
+    width: 1150px;
+    height: auto;
+    box-shadow: 3px 2px 2px 3px rgb(179, 186, 194);
+}
+.mytitlebar{ 
+    color :rgb(243, 242, 242);
+    padding-bottom: 10px;
+    font-size: 50px; 
+    text-decoration: none;
+    height: 90px;
+}
+.myfac-box{
+    width: 800px;
+    height: 80px;
+    box-shadow: 3px 2px 2px 3px rgb(179, 186, 194);
+}
+.mydoss-link{
+    text-decoration: none;
+    color: black;
+    width: 100%;
+}
+.mydoss-bar {
+    display: inline-block;
+    text-decoration: none;
+    color: black;
+    padding: 10px 15px;
+    width: 100%;
+}
+.my-search-bar{
+    width: 500px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    font-size: 16px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+.encadre {
+    border-color: black
+}
+.mydoss-bar::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: black;
+    transition: width 0.3s ease-in-out;
+}
+
+.mydoss-bar:hover::after {
+    width: 100%;
+}
+.mymain-bar{
+    box-shadow: 3px 2px 2px 3px rgb(179, 186, 194);
+    background: linear-gradient(to bottom, #f7f7f7, #cfcfcf); /* Vert clair vers foncé */
+    height: 100px; 
+    width: 100%; 
+    padding-left: 35px; 
+    padding-top: 25px;
+
+}
+.mylanguage-bar{
+    background: linear-gradient(to bottom, #69BE28, #4b9e0f);
+    color :rgb(0, 0, 0); 
+    padding-top: 10px;
+    font-size: 50px; 
+    text-decoration: none;
+    height: 90px;
+}
+.mylogin-bar{
+    background: linear-gradient(to bottom, #f7f7f7, #cfcfcf);
+    color :black; 
+    font-size: 20px;
+    padding-top: 10px; 
+    text-decoration: none; 
+    font-family: 'verdana', cursive;
+    box-shadow: 3px 2px 2px 3px rgb(183, 193, 203);
+    height: 50px;
+}
+.mymenu-logo{
+    color: white; 
+    font-size: 75px;
+    text-decoration: none; 
+    font-family: 'Brush Script MT', cursive;
+}
+.mymenu-bar{
+    width: 250px;
+    height: 100vh;
+    background: linear-gradient(to bottom, #69BE28, #1c3a06); /* Vert clair vers foncé */
+    border-right: 1px solid rgba(255, 255, 255, 0.1); /* Bordure discrète */
+}
+.mynav-item{
+    text-decoration: none;
+    margin-bottom: 50px;
+    
+    transition: 0.25s;
+    height: 50px;
+}
+.mynav-item:hover{
+    font-size: 20px;
+}
+.encadre {
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 3px;
+    background-color: #f9f9f9;
+    display: inline-block;
+}
+.flex-grow-1 {
+    overflow-y: auto; /* Permet le défilement du contenu principal si nécessaire */
+}
+.timeline {
+    border-left: 2px solid #007bff;
+    padding-left: 20px;
+    margin-top: 20px;
+}
+
+.timeline-list {
+    list-style: none;
+    padding: 0;
+}
+
+.timeline-list li {
+    margin-bottom: 15px;
+    position: relative;
+    padding-left: 20px;
+}
+
+.timeline-list li::before {
+    content: "";
+    position: absolute;
+    left: -10px;
+    top: 5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #007bff;
+}
+
+.timeline-list li.completed::before {
+    background-color: green;
+}
+
+.timeline-list li.upcoming::before {
+    background-color: orange;
+}
+
+.timeline-list li.completed {
+    color: green;
+}
+
+.timeline-list li.upcoming {
+    color: orange;
+}

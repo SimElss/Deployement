@@ -1,0 +1,45 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="mymain-bar d-flex justify-content-between align-items-center">
+    <h1>Accueil</h1>
+    <div style="margin-right: 80px;">
+        <a href="/en/switch_to_fr" class="btn btn-outline-dark me-2">Français</a>
+        <a href="/fr/switch_to_en" class="btn btn-outline-dark">Anglais</a>
+    </div>
+  </div>
+    <div style="padding-left: 35px;">
+        <body>
+            <div class="my-box mt-5 pt-3">
+            <h2 class="display-6 text-center">Gestion des groupes des utilisateurs</h2><br>
+            <table class="table table-striped table-hover caption-top">
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.group }}</td>
+                        
+                            <form method="post" action="/fr/admin/users/update">
+                                <td>
+                                <input type="hidden" name="user_id" value="{{ user.id }}">
+                                <select name="new_group">
+                                    <option value="admin" {% if user.group == 'admin' %}selected{% endif %}>Admin</option>
+                                    <option value="responsable" {% if user.group == 'responsable' %}selected{% endif %}>Responsable</option>
+                                    <option value="Secrétariat" {% if user.group == 'Secrétariat' %}selected{% endif %}>Secrétariat</option>
+                                    <option value="candidat" {% if user.group == 'candidat' %}selected{% endif %}>Candidat</option>
+                                </select>
+                                
+                            </td>
+                            <td>
+                                <button type="submit">Changer</button>
+                            </td>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </div>
+                </tbody>
+            </table>
+        </body>
+        </div>
+  {% endblock %}
