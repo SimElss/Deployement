@@ -1,3 +1,4 @@
+import os
 import uvicorn
 from colorama import init
 import signal
@@ -8,5 +9,6 @@ if __name__ == "__main__":
     init()
     signal.signal(signal.SIGINT, handle_exit)
     signal.signal(signal.SIGTERM, handle_exit)
-    #Get app variable from app file in app folder (app.app)
-    uvicorn.run("app.app:app", host="127.0.0.1", port=8000)
+    port = int(os.environ.get("PORT", 8000))  # 8000 est la valeur par défaut si PORT n'est pas défini
+    uvicorn.run("app.app:app", host="0.0.0.0", port=port)
+    
