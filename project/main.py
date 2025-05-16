@@ -2,7 +2,6 @@ import os
 import uvicorn
 from colorama import init
 import signal
-from app.app import handle_exit
 
 
 if __name__ == "__main__":
