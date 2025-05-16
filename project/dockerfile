@@ -14,4 +14,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 8000
 
 # Démarrer l’application
-CMD ["tail", "-f", "/dev/null"]
+CMD ["python", "main.py"]
