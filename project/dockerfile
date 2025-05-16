@@ -11,7 +11,8 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copie tout le code
-COPY . .
+COPY project/ /app/
+WORKDIR /app 
 
 # Expose le port utilisé par Uvicorn
 EXPOSE 8000
