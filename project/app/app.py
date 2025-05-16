@@ -97,8 +97,5 @@ def shutdown_event():
     delete_database()
     vider_db()
 
-def handle_exit(*args):
-    shutdown_event()
-    print("Goodbye World !")
-    
+
 load_dotenv()
