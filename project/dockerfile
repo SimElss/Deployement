@@ -1,21 +1,17 @@
-# Utilise une image légère de Python
+# Utilise une image Python légère
 FROM python:3.11-slim
 
-# Crée un dossier de travail
+# Définir le répertoire de travail dans le container
 WORKDIR /app
 
-# Copie les fichiers de dépendances
-COPY requirements.txt .
+# Copier le contenu du dossier "project" dans /app
+COPY project/ /app/
 
-# Installe les dépendances
+# Installer les dépendances
 RUN pip install --no-cache-dir -r requirements.txt
 
-
-# Copie tout le code
-COPY project/ .
-
-# Expose le port utilisé par Uvicorn
+# Exposer le port (pour information)
 EXPOSE 8000
 
-# Lance l’application FastAPI
+# Démarrer l’application
 CMD ["python", "main.py"]
