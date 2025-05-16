@@ -10,9 +10,9 @@ COPY requirements.txt .
 # Installe les dépendances
 RUN pip install --no-cache-dir -r requirements.txt
 
+
 # Copie tout le code
-COPY project/ /app/
-WORKDIR /app 
+COPY project/ .
 
 # Expose le port utilisé par Uvicorn
 EXPOSE 8000
