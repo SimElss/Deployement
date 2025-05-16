@@ -86,16 +86,29 @@ def custom_change_mdp_error_redirection(request: Request, exception: ChangeMdpEr
     query_params = urlencode({"description": description, "url": previous_url})
     return RedirectResponse(url=f"/fr/error?{query_params}", status_code=302)
 
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
 @app.on_event("startup")
 def on_application_started():
     print("Good Morning World !")
-    create_database()
-    initialiser_db()
+    try:
+        create_database()
+        initialiser_db()
+    except Exception as e:
+        print(f"Startup error: {e}")
 
 @app.on_event("shutdown")
 def shutdown_event():
-    delete_database()
-    vider_db()
+    try:
+        delete_database()
+        vider_db()
+    except Exception as e:
+        print(f"Shutdown error: {e}")
 
-
-load_dotenv()
+import traceback
+try:
+    load_dotenv()
+except Exception:
+    print("Erreur dotenv :", traceback.format_exc())
