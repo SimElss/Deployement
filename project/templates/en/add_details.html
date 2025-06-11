@@ -1,71 +1,80 @@
 {% extends "index.html" %}
 {% block content %}
 <div class="mymain-bar d-flex justify-content-between align-items-center">
-    <h1>Ajout d'un nouveau dossier - Partie 2</h1>
+    <h1>Add a New File - Part 2</h1>
     <div style="margin-right: 80px;">
-        <a href="/en/switch_to_fr" class="btn btn-outline-dark me-2">Français</a>
-        <a href="/fr/switch_to_en" class="btn btn-outline-dark">Anglais</a>
+        <a href="/en/switch_to_fr" class="btn btn-outline-dark me-2">French</a>
+        <a href="/fr/switch_to_en" class="btn btn-outline-dark">English</a>
     </div>
 </div>
 <div style="padding-left: 35px;">
     <div style="padding-left: 35px;">
         <div class="my-box p-3 mt-5">
-            <h2>Compléter les détails du dossier</h2>
+            <h2 class="mb-5 text-center">Complete the file details</h2>
             <form method="POST" action="/en/details/add/{{ dossier.id }}">
                 <div class="mb-3">
-                    <label for="date_cloture" class="form-label">Date de clôture</label>
+                    <label for="date_cloture" class="form-label">Closing date</label>
                     <input type="date" id="date_cloture" name="date_cloture" class="form-control">
                 </div>
                 <div class="mb-3">
-                    <label for="date_reception" class="form-label">Date de réception</label>
+                    <label for="date_reception" class="form-label">Reception date</label>
                     <input type="date" id="date_reception" name="date_reception" class="form-control">
                 </div>
                 <div class="mb-3">
-                    <label for="dossier_complet" class="form-label">Dossier complet</label>
-                    <input type="checkbox" id="dossier_complet" name="dossier_complet" class="form-check-input">
+                    <label for="dossier_complet" class="form-label">Complete file</label>
+                    <select id="dossier_complet" name="dossier_complet" class="form-select">
+                        <option value="True">Yes</option>
+                        <option value="False" selected>No</option>
+                    </select>
                 </div>
                 <div class="mb-3">
-                    <label for="date_transmission_commission" class="form-label">Date de transmission à la commission</label>
+                    <label for="date_transmission_commission" class="form-label">Date sent to the committee</label>
                     <input type="date" id="date_transmission_commission" name="date_transmission_commission" class="form-control">
                 </div>
                 <div class="mb-3">
-                    <label for="date_reunion_commission" class="form-label">Date de réunion de la commission</label>
+                    <label for="date_reunion_commission" class="form-label">Committee meeting date</label>
                     <input type="date" id="date_reunion_commission" name="date_reunion_commission" class="form-control">
                 </div>
                 <div class="mb-3">
-                    <label for="candidature_non_retenue" class="form-label">Candidature non retenue</label>
-                    <input type="checkbox" id="candidature_non_retenue" name="candidature_non_retenue" class="form-check-input">
+                    <label for="candidature_non_retenue" class="form-label">Application not retained</label>
+                    <select id="candidature_non_retenue" name="candidature_non_retenue" class="form-select">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
                 </div>
                 <div class="mb-3">
-                    <label for="confirmation_information" class="form-label">Confirmation des informations</label>
-                    <input type="checkbox" id="confirmation_information" name="confirmation_information" class="form-check-input">
+                    <label for="confirmation_information" class="form-label">Confirmation of information</label>
+                    <select id="confirmation_information" name="confirmation_information" class="form-select">
+                        <option value="True">Yes</option>
+                        <option value="False" selected>No</option>
+                    </select>
                 </div>
                 <div class="mb-3">
-                    <label for="date_entendu" class="form-label">Date entendu</label>
+                    <label for="date_entendu" class="form-label">Interview date</label>
                     <input type="date" id="date_entendu" name="date_entendu" class="form-control">
                 </div>
                 <div class="mb-3">
-                    <label for="position_classement" class="form-label">Position dans le classement</label>
-                    <input type="number" id="position_classement" name="position_classement" class="form-control">
+                    <label for="position_classement" class="form-label">Ranking position</label>
+                    <input type="number" id="position_classement" name="position_classement" class="form-control" value="0" min="0">
                 </div>
                 <div class="mb-3">
-                    <label for="date_soumission_autorites" class="form-label">Date de soumission aux autorités</label>
+                    <label for="date_soumission_autorites" class="form-label">Date submitted to faculty authorities</label>
                     <input type="date" id="date_soumission_autorites" name="date_soumission_autorites" class="form-control">
                 </div>
                 <div class="mb-3">
-                    <label for="date_transmission_autorites" class="form-label">Date de transmission aux autorités</label>
+                    <label for="date_transmission_autorites" class="form-label">Date sent to authorities</label>
                     <input type="date" id="date_transmission_autorites" name="date_transmission_autorites" class="form-control">
                 </div>
                 <div class="mb-3">
-                    <label for="date_entree_fonction" class="form-label">Date d'entrée en fonction</label>
+                    <label for="date_entree_fonction" class="form-label">Start date</label>
                     <input type="date" id="date_entree_fonction" name="date_entree_fonction" class="form-control">
                 </div>
                 <div class="mb-3">
-                    <label for="date_suppression_dossier" class="form-label">Date de suppression du dossier</label>
+                    <label for="date_suppression_dossier" class="form-label">File deletion date</label>
                     <input type="date" id="date_suppression_dossier" name="date_suppression_dossier" class="form-control">
                 </div>
                 <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-outline-dark" style="width: 400px; height: 50px; box-shadow: 3px 2px 2px 3px rgb(179, 186, 194);">Ajouter les détails</button>
+                    <button type="submit" class="btn btn-outline-dark" style="width: 400px; height: 50px; box-shadow: 3px 2px 2px 3px rgb(179, 186, 194);">Add details</button>
                 </div>
             </form>
         </div>

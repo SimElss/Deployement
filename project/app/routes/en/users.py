@@ -104,8 +104,9 @@ def register_route(request: Request, username: Annotated[str, Form()], name: Ann
         "surname": surname,
         "password": password,
         "email": email,
-        "group": "client",
-        "whitelist": True
+        "group": "candidat",
+        "whitelist": True,
+        "notification": ""  # Default value for notification
     }
     new_user = UserSchema.model_validate(new_user)
     # If an exception is raised it will be caught by the app event listener (see app.py)
@@ -113,7 +114,7 @@ def register_route(request: Request, username: Annotated[str, Form()], name: Ann
     success_message = f"User {username} successfully added!"
     return templatesen.TemplateResponse(
         "login.html",
-        context={'request': request, 'message': success_message}
+        context={'request': request, 'message': success_message,  'current_user': None, 'group': None}
     )
 
 # Route for password reset page

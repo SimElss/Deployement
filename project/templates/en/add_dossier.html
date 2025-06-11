@@ -11,7 +11,7 @@
     <div style="padding-left: 35px;">
         <div class="my-box p-3 mt-5">
             <h2 class="text-center mb-4">Complete the File Details</h2>
-            <form method="POST" action="/en/dossier/new/add" enctype="multipart/form-data" onsubmit="return validateForm()">
+            <form method="POST" action="/en/dossier/new/add" enctype="multipart/form-data" ">
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
                     <input type="text" id="username" name="username" class="form-control" placeholder="Selice" required>
@@ -41,29 +41,8 @@
                     <input type="file" id="image" name="image" accept=".jpg,.jpeg,.png">
                 </div>
             
-                <!-- Script de validation -->
-                <script>
-                    function validateForm() {
-                        const imageInput = document.getElementById("image");
-                        const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
-                
-                        if (!imageInput.value) {
-                            alert("Adding an image is mandatory. Please upload an image.");
-                            return false; // Empêche la soumission du formulaire
-                        }
-                
-                        if (!allowedExtensions.exec(imageInput.value)) {
-                            alert("Invalid file format. Only .jpg, .jpeg, and .png are allowed.");
-                            imageInput.value = ""; // Réinitialise le champ fichier
-                            return false; // Empêche la soumission du formulaire
-                        }
-                
-                        return true; // Permet la soumission si tout est correct
-                    }
-                </script>
-            
                 <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-outline-dark" style="width: 400px; height: 50px; box-shadow: 3px 2px 2px 3px rgb(179, 186, 194);">Ajouter</button>
+                    <button type="submit" class="btn btn-outline-dark" style="width: 400px; height: 50px; box-shadow: 3px 2px 2px 3px rgb(179, 186, 194);">Add</button>
                 </div>
             </form>
         </div>

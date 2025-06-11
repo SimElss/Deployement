@@ -578,7 +578,7 @@ def export_dossiers_to_excel(user: UserSchema = Depends(login_manager.optional))
         worksheet = writer.sheets["Dossiers"]
 
         # Add a title above the columns
-        worksheet.merge_range('A1:F1', 'List of Dossiers', workbook.add_format({
+        worksheet.merge_range('A1:E1', 'List of Dossiers', workbook.add_format({
             'bold': True,
             'font_size': 14,
             'align': 'center',

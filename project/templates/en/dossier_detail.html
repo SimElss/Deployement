@@ -11,49 +11,61 @@
 <div style="padding-left: 35px;">
     <div style="padding-left: 35px;">
         <div class="my-box p-3 mt-5">
-            <h2>File Details : {{ dossier.postereference }}</h2>
-            <p><strong>Name:</strong> <span class="encadre">{{ dossier.name }}</span></p>
+            <h2 class="mb-5">File Details: {{ dossier.postereference }}</h2>
+            <p><strong>Candidate Name:</strong> <span class="encadre">{{ dossier.name }}</span></p>
             <p><strong>Email:</strong> <span class="encadre">{{ dossier.mail }}</span></p>
             <p><strong>Phone Number:</strong> <span class="encadre">{{ dossier.phonenumber }}</span></p>
-            <p><strong>File Reference:</strong> <span class="encadre">{{ dossier.postereference }}</span></p>
             <p><strong>Professor:</strong> <span class="encadre">{{ dossier.profref }}</span></p>
-            <p><strong>File status:</strong> 
+            <p><strong>Complete File:</strong> 
                 {% if details.dossier_complet %}
                     <span class="encadre" style="border-color: green;">Your file is complete.</span>
                 {% else %}
-                    <span class="encadre" style="border-color: red;">Your file needs to be completed.</span>
+                    <span class="encadre" style="color: red;">Your application file is not complete. Check your notifications to receive the email and complete your file.</span>
+                    <span class="encadre" style="color: red;">Without the duly completed UNamur application form, your application will not be considered.</span>
+                {% endif %}
+            </p>
+            <p><strong>Reference of the call for applications:</strong> <span class="encadre">{{ dossier.postereference }}</span></p>
+            <p><strong>Application not retained:</strong>
+                {% if details.candidature_non_retenue == "pending" %}
+                    <span class="encadre" style="border-color: orange;">Pending</span>
+                {% elif details.candidature_non_retenue == "yes" %}
+                    <span class="encadre" style="border-color: green;">Yes</span>
+                {% elif details.candidature_non_retenue == "no" %}
+                    <span class="encadre" style="border-color: red;">No</span>
+                {% else %}
+                    <span class="encadre" style="border-color: orange;">Still pending</span>
                 {% endif %}
             </p>
 
             <hr class="mb-3" style="border: 1px solid #000000">
+
+            <div class="timeline mt-5">
+                <h3 class="mb-4">Timeline of Steps</h3>
+                <ul class="timeline-list">
+                    {% for event in timeline_dates %}
+                        <li class="{% if event.date > now %}upcoming{% else %}completed{% endif %}">
+                            <strong>{{ event.label }}:</strong> {{ event.date.strftime('%d/%m/%Y') }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
             
-            
-            <p><strong>Closing Date:</strong> <span class="encadre">{{ details.date_cloture.strftime('%d/%m/%Y') }}</span></p>
-            <p><strong>Reception Date:</strong> <span class="encadre">{{ details.date_reception.strftime('%d/%m/%Y') }}</span></p>
-            <p><strong>Date of Transmission to the Commission:</strong> <span class="encadre">{{ details.date_transmission_commission.strftime('%d/%m/%Y') }}</span></p>
-            <p><strong>Date of Commission Meeting:</strong> <span class="encadre">{{ details.date_reunion_commission.strftime('%d/%m/%Y') }}</span></p>
-            <p><strong>Application Not Retained:</strong> <span class="encadre">{{ details.candidature_non_retenue }}</span></p>
-            <p><strong>Information Confirmation:</strong> <span class="encadre">{{ details.confirmation_information }}</span></p>
-            <p><strong>Date the Candidate Will Be Heard:</strong> <span class="encadre">{{ details.date_entendu.strftime('%d/%m/%Y') }}</span></p>
-            <p><strong>Ranking Position:</strong> <span class="encadre">{{ details.position_classement }}</span></p>
-            <p><strong>Submission Date to Faculty Authorities:</strong> <span class="encadre">{{ details.date_soumission_autorites.strftime('%d/%m/%Y') }}</span></p>
-            <p><strong>Transmission Date to Authorities:</strong> <span class="encadre">{{ details.date_transmission_autorites.strftime('%d/%m/%Y') }}</span></p>
-            <p><strong>Expected Start Date:</strong> <span class="encadre">{{ details.date_entree_fonction.strftime('%d/%m/%Y') }}</span></p>
-            <p><strong>File Deletion Date:</strong> <span class="encadre">{{ details.date_suppression_dossier.strftime('%d/%m/%Y') }}</span></p>
             {% if group != "candidat" %}
             <div class="text-center">
                 <a href="/en/modify_detail/{{ dossier.id }}">
                     <button type="button" class="btn btn-outline-dark" style="width: 400px; height: 50px; box-shadow: 3px 2px 2px 3px rgb(179, 186, 194);">
-                        Edit File Details
+                        Edit file details
+                    </button>
+                </a>
+            
+            {% endif %}
+                <a href="/en/edit_dossier/{{dossier.id}}">
+                    <button type="button" class="btn btn-outline-dark" style="width: 400px; height: 50px; box-shadow: 3px 2px 2px 3px rgb(179, 186, 194);">
+                        Edit personal information
                     </button>
                 </a>
             </div>
-            {% endif %}
-            <a href="/en/edit_dossier/{{dossier.id}}">
-                <button type="button" class="btn btn-outline-dark" style="width: 400px; height: 50px; box-shadow: 3px 2px 2px 3px rgb(179, 186, 194);">
-                    Edit Personal Information
-                </button>
-            </a>
+            
         </div>
     </div>
 </div>

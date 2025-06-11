@@ -10,7 +10,8 @@
         <div class="p-2 flex-fill" style="width: 12%;">{{ candidat.profref }}</div>
         <div class="p-2 flex-fill" style="width: 12%;">
           {% if candidat.image %}
-            <img src="{{ candidat.image }}" alt="Image de {{ candidat.name }}" width="100px">
+          
+            <img src="{{ candidat.image.replace('../static', '/static') }}" width="100px">
           {% else %}
             <span>No image</span>
           {% endif %}
@@ -42,7 +43,7 @@
         <div class="p-2 flex-fill" style="width: 15%;">{{ candidat.profref }}</div>
         <div class="p-2 flex-fill" style="width: 15%;">
           {% if candidat.image %}
-            <img src="{{ candidat.image }}" alt="Image de {{ candidat.name }}" width="100px">
+            <img src="{{ candidat.image.replace('../static', '/static') }}" alt="Image de {{ candidat.name }}" width="100px">
           {% else %}
             <span>No image</span>
           {% endif %}
@@ -74,7 +75,7 @@
         <div class="p-2 flex-fill" style="width: 15%;">{{ candidat.profref }}</div>
         <div class="p-2 flex-fill" style="width: 15%;">
           {% if candidat.image %}
-            <img src="{{ candidat.image }}" alt="Image de {{ candidat.name }}" width="100px">
+            <img src="{{ candidat.image.replace('../static', '/static') }}" alt="Image de {{ candidat.name }}" width="100px">
           {% else %}
             <span>No image</span>
           {% endif %}

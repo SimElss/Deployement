@@ -1,20 +1,19 @@
 {% extends "index.html" %}
 {% block content %}
 <div class="mylanguage-bar d-flex justify-content-between align-items-center text-center">
-    <div class="mytitlebar flex-grow-1 " style="margin-left: 150px;">
+    <div class="mytitlebar flex-grow-1 " style="margin-left: 500px; ">
         Applicant Tracking
-    </div>
-    <div>
-        <a href="/en/switch_to_fr" class="btn btn-outline-light">French</a>
+        <a href="/en/switch_to_fr" class="btn btn-outline-light" style="margin-left: 300px;">French</a>
         <a href="/fr/switch_to_en" class="btn btn-outline-light">English</a>
     </div>
+    
 </div>
 <div class="mylogin-bar text-center mb-5">
     Connection to your account
 </div>
 <div class="container mt-5">
-    <h1 class="text-center">Inscription</h1>
-    <form method="POST" action="/fr/register" class="mt-4">
+    <h1 class="text-center">Sign up</h1>
+    <form method="POST" action="/en/register" class="mt-4">
         <div class="mb-3">
             <label for="username" class="form-label">Username </label>
             <input type="text" id="username" name="username" class="form-control" placeholder="Entrez votre nom d'utilisateur" required>
@@ -40,7 +39,7 @@
             <input type="password" id="password_confirm" name="password_confirm" class="form-control" placeholder="Confirmez votre mot de passe" required>
         </div>
         <div class="text-center">
-            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="submit" class="btn btn-outline-dark">Register</button>
         </div>
     </form>
 </div>

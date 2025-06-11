@@ -29,17 +29,16 @@
         </li>
         <li class="mynav-item nav-item">
           <a class="nav-link text-white"  href="/en/profile">
-            Profile
+            Profil
           </a>
         </li>
-        {% if current_user.group != 'candidat' %}
-          <li class="mynav-item nav-item">
-              <a class="nav-link text-white" href="/en/admin/users" >
-              Admin
-              </a>
-            
-          </li>
-          {% endif %}
+        {# {% if current_user.group != 'candidat' %} #}
+          {# <li class="mynav-item nav-item"> #}
+              {# <a class="nav-link text-white" href="/fr/admin/users" > #}
+              {# Administrateur #}
+              {# </a> #}
+          {# </li> #}
+        {# {% endif %} #}
         <li class="mynav-item nav-item">
           <form class="nav-link text-white" action="/en/logout" method="post">
             <button class="btn btn-outline-light" style="box-shadow: 2px 2px 2px 1px rgb(179, 186, 194);">

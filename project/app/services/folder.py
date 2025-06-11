@@ -171,11 +171,11 @@ def search_dossiers(keyword: str, page: int = 1, per_page: int = 10) -> (List[Do
         tuple: A list of dossiers and a boolean (True if any dossiers have missing details, False otherwise).
     """
     with Session() as session:
-        query = session.query(DossierCandidats).filter(
+        query = session.query(DossierCandidats).options(joinedload(DossierCandidats.details)).filter(
             (DossierCandidats.mail == keyword) |
             (DossierCandidats.phonenumber == keyword) |
             (DossierCandidats.postereference == keyword) |
-            (DossierCandidats.name == keyword)  # Exemple pour une colonne "nom"
+            (DossierCandidats.name == keyword)
         )
         # Pagination
         dossiers = query.offset((page - 1) * per_page).limit(per_page).all()

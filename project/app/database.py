@@ -89,7 +89,7 @@ def initialiser_db():
 
             # Create folder candidat
 
-            candidate_1 = DossierCandidats(id=str(uuid4()), username="John", name="Doe", mail="candidate1@gmail.com", postereference="Z50007300" , profref="Mr.Schumacher",phonenumber="+32472456891", image="../static/images/image1.jpeg", user_id=user_2.id)
+            candidate_1 = DossierCandidats(id=str(uuid4()), username="John", name="Doe", mail="user@gmail.com", postereference="Z50007300" , profref="Mr.Schumacher",phonenumber="+32472456891", image="../static/images/image1.jpeg", user_id=user_2.id)
             candidate_2 = DossierCandidats(id=str(uuid4()), username="John", name="Doe", mail="elicesimon06@gmail.com", postereference="Z50007301", profref="Mr.Frenay",phonenumber="+32472456891", image="../static/images/image1.jpeg", user_id=user_2.id)
             candidate_3 = DossierCandidats(id=str(uuid4()), username="Eve", name="Williams", mail="candidate1@gmail.com", postereference="Z50007303" , profref="Mr.Elice",phonenumber="+32477129438", image="../static/images/image2.jpg", user_id=user_6.id)
             candidate_4 = DossierCandidats(id=str(uuid4()), username="Charlie", name="Brown", mail="candidate2@gmail.com", postereference="50001235", profref="Mr.Englebert",phonenumber="+32489567024", image="../static/images/image3.jpg", user_id=user_7.id)

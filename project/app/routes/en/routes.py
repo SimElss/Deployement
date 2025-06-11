@@ -103,7 +103,7 @@ def mainpage_candidat(request: Request, user: UserSchema = Depends(login_manager
     session = Session()
 
     # Retrieve files linked to the user
-    dossiers = session.query(DossierCandidats).filter(DossierCandidats.user_id == user.id).all()
+    dossiers = session.query(DossierCandidats).filter(DossierCandidats.mail == user.email).all()
     has_missing_details = any(candidat.details is None for candidat in dossiers)
 
     session.close()
@@ -161,7 +161,7 @@ def list_dossiers_candidat(request: Request, user: UserSchema = Depends(login_ma
     
     session = Session()
     total_dossiers = session.query(DossierCandidats).filter(DossierCandidats.user_id == user.id).count()
-    dossiers = session.query(DossierCandidats).options(joinedload(DossierCandidats.details)).filter(DossierCandidats.user_id == user.id).offset((page - 1) * per_page).limit(per_page).all()
+    dossiers = session.query(DossierCandidats).options(joinedload(DossierCandidats.details)).filter(DossierCandidats.mail == user.email).offset((page - 1) * per_page).limit(per_page).all()
     has_missing_details = any(dossier.details is None for dossier in dossiers)
     session.close()
     
@@ -244,14 +244,36 @@ def show_dossier_details(request: Request, id: str, user: UserSchema = Depends(l
     Displays the details of a specific dossier.
     Redirects to the add details page if no details are associated with the dossier.
     """
+
+
     dossier, has_missing_details = get_dossier_by_id(id)
     details = get_details_dossier_by_id(id)
+
     
     if not dossier:
         return {"error": "Dossier not found"}
     
     if not details:
         return RedirectResponse(url=f"/en/details/add/{id}", status_code=302)
+    
+    now = datetime.now()
+    timeline_dates = [
+        {"label": "Closing date", "date": details.date_cloture},
+        {"label": "Reception date", "date": details.date_reception},
+        {"label": "Date sent to the committee", "date": details.date_transmission_commission},
+        {"label": "Committee meeting date", "date": details.date_reunion_commission},
+        {"label": "Date when the candidate will be interviewed", "date": details.date_entendu},
+        {"label": "Date submitted to faculty authorities", "date": details.date_soumission_autorites},
+        {"label": "Date sent to authorities", "date": details.date_transmission_autorites},
+        {"label": "Expected start date", "date": details.date_entree_fonction},
+        {"label": "File deletion date", "date": details.date_suppression_dossier},
+    ]
+
+    # Trier les dates par ordre chronologique
+    timeline_dates = sorted(
+        [d for d in timeline_dates if d["date"]],  # Exclure les dates nulles
+        key=lambda x: x["date"]
+    )
     
     return templatesen.TemplateResponse(
         "dossier_detail.html",
@@ -261,7 +283,9 @@ def show_dossier_details(request: Request, id: str, user: UserSchema = Depends(l
             'group': user.group,
             'dossier': dossier,
             'details': details,
-            'has_missing_details': has_missing_details
+            'has_missing_details': has_missing_details,
+            'now': now,
+            'timeline_dates': timeline_dates,
         }
     )
 
@@ -428,6 +452,34 @@ def search_dossiers_route(
         }
     )
 
+@router.post("/en/dossier/searchcandidat")
+def search_dossiers_route_candidat(
+    request: Request,
+    keyword: str = Form(...),
+    page: int = Query(1, ge=1),
+    per_page: int = Query(10, ge=1),
+    user: UserSchema = Depends(login_manager.optional)
+):
+    """
+    Searches for dossiers based on a keyword.
+    Displays the search results in a paginated format.
+    """
+
+    dossiers, has_missing_details = search_dossiers(keyword, page, per_page)
+    
+    return templatesen.TemplateResponse(
+        "dossiercandidat.html",
+        context={
+            'request': request,
+            'current_user': user,
+            'group': user.group,
+            'dossiers': dossiers,
+            'keyword': keyword,
+            'has_missing_details': has_missing_details,
+            'notifications': user.notification
+        }
+    )
+
 @router.post("/en/dossier/delete/search")
 def search_dossiers_route(
     request: Request,
@@ -542,7 +594,7 @@ def export_dossiers_to_excel(user: UserSchema = Depends(login_manager.optional))
         worksheet = writer.sheets["Dossiers"]
 
         # Add a title above the columns
-        worksheet.merge_range('A1:F1', 'List of Dossiers', workbook.add_format({
+        worksheet.merge_range('A1:E1', 'List of Dossiers', workbook.add_format({
             'bold': True,
             'font_size': 14,
             'align': 'center',
@@ -672,13 +724,14 @@ async def post_add_dossier(
     Redirects to the login page if the user is not connected.
     """
     if user is None:
-        return RedirectResponse(url="/fr/login", status_code=302)
+        return RedirectResponse(url="/en/login", status_code=302)
     if user and user.group == 'candidat':
-        return RedirectResponse(url="/fr/accueil", status_code=302)
+        return RedirectResponse(url="/en/accueil", status_code=302)
     
-    
-    if image:
-        # Vérifier l'extension du fichier
+    default_image_path = "../static/images/incognito.png"
+
+    # Vérifier si un fichier a été uploadé
+    if image and image.filename != "":
         valid_extensions = ["jpg", "jpeg", "png"]
         file_extension = image.filename.split(".")[-1].lower()
         if file_extension not in valid_extensions:
@@ -695,6 +748,8 @@ async def post_add_dossier(
             f.write(await image.read())
 
         relative_path = f"../static/images/{file_name}"
+    else:
+        relative_path = default_image_path
     
     new_dossier = add_dossier_candidat(
         username=username,
@@ -706,7 +761,7 @@ async def post_add_dossier(
         image=relative_path if image else None,
         user_id=user.id
     )
-    return RedirectResponse(url=f"/fr/details/add/{new_dossier.id}", status_code=302)
+    return RedirectResponse(url=f"/en/details/add/{new_dossier.id}", status_code=302)
 
 @router.get("/en/details/add/{dossier_id}")
 def get_add_details_form(request: Request, dossier_id: str, user: UserSchema = Depends(login_manager.optional)):
@@ -780,7 +835,7 @@ def get_users_with_groups(request: Request, user: UserSchema = Depends(login_man
     Permet de modifier le groupe de chaque utilisateur individuellement.
     """
     if user is None:
-        return RedirectResponse(url="/fr/login", status_code=302)
+        return RedirectResponse(url="/en/login", status_code=302)
     if user.group != 'admin':  # Vérifie si l'utilisateur est un administrateur
         raise HTTPException(status_code=403, detail="Access forbidden")
 

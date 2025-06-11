@@ -8,7 +8,7 @@
     </div>
 </div>
 <div class="my-box mt-5" style="padding: 20px; width: 1000px; margin-left: 35px;">
-    <h1>Modify the dossier</h1>
+    <h1>Modify</h1>
     <form action="/en/edit/{{dossier.id}}" method="post">
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
@@ -26,7 +26,7 @@
             <label for="postereference" class="form-label">Reference of the Post</label>
             <input type="text" id="postereference" name="postereference" class="form-control" value="{{ dossier.postereference }}" required>
         </div>
-        <button type="submit" class="btn btn-primary">Register</button>
+        <button type="submit" class="btn btn-outline-dark">Register</button>
     </form>
 </div>
 {% endblock %}
